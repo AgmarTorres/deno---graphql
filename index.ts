@@ -1,6 +1,13 @@
-import { serve } from "https://deno.land/std/http/server.ts";
-const s = serve({ port: 8000 });
-console.log("http://localhost:8000/");
-for await (const req of s) {
-  req.respond({ body: "Hello World\n" });
-}
+import { Application } from "https://deno.land/x/oak/mod.ts";
+import { GraphQLService } from "./server.ts";
+
+const app = new Application();
+
+app.use(GraphQLService.routes(), GraphQLService.allowedMethods());
+
+/*app.use((ctx) => {
+  ctx.response.body = "Hello World!";
+});
+*/
+
+await app.listen({ port: 8000 });

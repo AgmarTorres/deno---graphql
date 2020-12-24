@@ -7,3 +7,5 @@ denon --init
 ---
 
 graphQL server
+
+denon start
